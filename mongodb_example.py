@@ -1,12 +1,16 @@
 import pymongo
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+myclient = pymongo.MongoClient("mongodb://root:example@127.0.0.1:27017/")
 
-mydb = myclient["mydatabase"]
-
-print(mydb.list_collection_names())
-
+print(myclient)
+mydb = myclient['flaskdb']
+print(mydb)
 mycol = mydb["customers"]
+
+#mydb = myclient["mydatabase"]
+
+#print(mydb.list_collection_names())
+
 
 mylist = [
   { "name": "Amy", "address": "Apple st 652"},
@@ -23,7 +27,9 @@ mylist = [
   { "name": "Viola", "address": "Sideway 1633"}
 ]
 
-x = mycol.insert_many(mylist)
+mycol.insert_many(mylist)
+
+#x = mycol.insert_many(mylist)
 
 #print list of the _id values of the inserted documents:
-print(x.inserted_ids)
+#print(x.inserted_ids)
