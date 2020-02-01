@@ -1,30 +1,33 @@
 import pymongo
+from random import randint
 
-myclient = pymongo.MongoClient("mongodb://root:example@127.0.0.1:27017/")
+def get_choise():
 
-print(myclient)
-mydb = myclient['flaskdb']
-print(mydb)
-mycol = mydb["customers"]
+  d = {
+    0 : "admin",
+    1 : "student",
+    2 : "moderator"
+  }
+  return d[randint(0,2)]
 
-mylist = [
-  { "name": "Amy", "address": "Apple st 652"},
-  { "name": "Hannah", "address": "Mountain 21"},
-  { "name": "Michael", "address": "Valley 345"},
-  { "name": "Sandy", "address": "Ocean blvd 2"},
-  { "name": "Betty", "address": "Green Grass 1"},
-  { "name": "Richard", "address": "Sky st 331"},
-  { "name": "Susan", "address": "One way 98"},
-  { "name": "Vicky", "address": "Yellow Garden 2"},
-  { "name": "Ben", "address": "Park Lane 38"},
-  { "name": "William", "address": "Central st 954"},
-  { "name": "Chuck", "address": "Main Road 989"},
-  { "name": "Viola", "address": "Sideway 1633"}
-]
+def write_data():
 
-mycol.insert_many(mylist)
+  all_users = []
+  for e in range(25):
+    all_users.append({"login":"user"+str(e), "previlige": get_choise()})
+  mycol.insert_many(all_users)
 
-#x = mycol.insert_many(mylist)
+def get_data(db):
 
-#print list of the _id values of the inserted documents:
-#print(x.inserted_ids)
+  cursor = db.find({"previlige": "student"})
+  for student in cursor:
+    print(student["login"], student["previlige"])
+  
+if __name__ == "__main__":
+
+  myclient = pymongo.MongoClient("mongodb://root:example@127.0.0.1:27017/")
+  mydb = myclient['check_db']
+  mycol = mydb["users"]
+
+  #write_data(mycol)
+  get_data(mycol)
