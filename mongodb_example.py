@@ -7,11 +7,6 @@ mydb = myclient['flaskdb']
 print(mydb)
 mycol = mydb["customers"]
 
-#mydb = myclient["mydatabase"]
-
-#print(mydb.list_collection_names())
-
-
 mylist = [
   { "name": "Amy", "address": "Apple st 652"},
   { "name": "Hannah", "address": "Mountain 21"},
