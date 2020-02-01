@@ -1,2 +1,4 @@
-# StudentsTests
-Docker + MongoDB + Flask API
+Потестим новый стек? ヽ(*・ω・)ﾉ
+- Flask
+- MongoDB
+- Docker & docker-compose
