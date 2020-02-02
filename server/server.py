@@ -4,7 +4,7 @@ import pymongo
 
 app = Flask(__name__)
 api = Api(app)
-myclient = pymongo.MongoClient("mongodb://root:example@127.0.0.1:27017/")
+myclient = pymongo.MongoClient("mongodb://root:example@mongo:27017/")
 mydb = myclient['check_db']
 #Т.к. юзается пока только одна коллекция
 mycol = mydb["users"]
@@ -47,5 +47,4 @@ api.add_resource(RemoveUser, '/remove_user')
 api.add_resource(CheckUser, '/check_user')
 
 if __name__ == '__main__':
-    #app.run(host='0.0.0.0', debug=False)
-    app.run(host='127.0.0.1', debug=True)
+    app.run(host='0.0.0.0', debug=False)
